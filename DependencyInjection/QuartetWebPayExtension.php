@@ -20,6 +20,7 @@ class QuartetWebPayExtension extends Extension
         $configs = $this->processConfiguration($configuration, $config);
 
         $container->setParameter('quartet_webpay.api_secret', $configs['api_secret']);
+        $container->setParameter('quartet_webpay.api_public', $configs['api_public']);
         $container->setParameter('quartet_webpay.api_base', $configs['api_base']);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));

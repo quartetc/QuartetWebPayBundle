@@ -43,6 +43,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), $this->configuration);
 
         $this->assertParameter('my_api_secret_key', 'quartet_webpay.api_secret');
+        $this->assertParameter('my_api_public_key', 'quartet_webpay.api_public');
         $this->assertParameter(null, 'quartet_webpay.api_base');
     }
 
@@ -98,7 +99,8 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
     private function getEmptyConfig()
     {
         return array(
-            'api_secret'    => 'my_api_secret_key'
+            'api_secret'    => 'my_api_secret_key',
+            'api_public'    => 'my_api_public_key',
         );
     }
 }
