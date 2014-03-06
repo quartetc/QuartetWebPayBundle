@@ -33,7 +33,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         $loader = new QuartetWebPayExtension();
         $config = $this->getEmptyConfig();
         unset($config['api_secret']);
-        $loader->load([$config], $this->configuration);
+        $loader->load(array($config), $this->configuration);
     }
 
     public function testDefaultConfiguration()
