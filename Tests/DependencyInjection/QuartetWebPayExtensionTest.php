@@ -40,7 +40,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $loader = new QuartetWebPayExtension();
         $config = $this->getEmptyConfig();
-        $loader->load([$config], $this->configuration);
+        $loader->load(array($config), $this->configuration);
 
         $this->assertParameter('my_api_secret_key', 'quartet_webpay.api_secret');
         $this->assertParameter(null, 'quartet_webpay.api_base');
@@ -54,7 +54,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         $loader = new QuartetWebPayExtension();
         $config = $this->getEmptyConfig();
         $config['api_base'] = 'http://acme.com/';
-        $loader->load([$config], $this->configuration);
+        $loader->load(array($config), $this->configuration);
 
         $this->assertParameter('http://acme.com/', 'quartet_webpay.api_base');
     }
@@ -66,7 +66,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $loader = new QuartetWebPayExtension();
         $config = $this->getEmptyConfig();
-        $loader->load([$config], $this->configuration);
+        $loader->load(array($config), $this->configuration);
 
         $this->assertHasDefinition('quartet_webpay');
 
