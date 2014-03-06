@@ -18,6 +18,7 @@ class Configuration implements ConfigurationInterface
         $root = $builder->root('quartet_webpay');
 
         $this->addGlobalConfig($root);
+        $this->addTemplatingConfig($root);
 
         return $builder;
     }
@@ -39,6 +40,27 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('api_base')
                     ->defaultNull()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addTemplatingConfig(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('templating')
+                            ->defaultValue('QuartetWebPayBundle:Form:fields.html.twig')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ;

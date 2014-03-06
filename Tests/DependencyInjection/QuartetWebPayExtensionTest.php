@@ -14,11 +14,17 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
      */
     private $configuration;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function setUp()
     {
         $this->configuration = new ContainerBuilder();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function tearDown()
     {
         $this->configuration = null;
@@ -36,6 +42,9 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), $this->configuration);
     }
 
+    /**
+     * @test
+     */
     public function testDefaultConfiguration()
     {
         $loader = new QuartetWebPayExtension();
@@ -45,6 +54,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('my_api_secret_key', 'quartet_webpay.api_secret');
         $this->assertParameter('my_api_public_key', 'quartet_webpay.api_public');
         $this->assertParameter(null, 'quartet_webpay.api_base');
+        $this->assertParameter('QuartetWebPayBundle:Form:fields.html.twig', 'quartet_webpay.form.templating');
     }
 
     /**

@@ -1,0 +1,7 @@
+services:
+  quartet_webpay.form_type.token:
+    class: Quartet\Bundle\WebPayBundle\Form\Type\TokenFormType
+    arguments:
+      - %quartet_webpay.api_public%
+    tags:
+      - { name: form.type, alias: webpay_token }

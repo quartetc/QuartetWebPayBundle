@@ -1,0 +1,13 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_widget_simple %}
+    {% if webpay is defined %}
+        {{ block('webpay_checkout') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block webpay_checkout %}
+    <script src="https://checkout.webpay.jp/v1/" class="webpay-button"{% for key, val in webpay %} {{ key }}="{{ val }}"{% endfor %}></script>
+{% endblock %}
