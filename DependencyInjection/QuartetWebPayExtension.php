@@ -27,4 +27,12 @@ class QuartetWebPayExtension extends Extension
 
         $loader->load('services.yml');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'quartet_webpay';
+    }
 }
