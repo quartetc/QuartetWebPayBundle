@@ -23,5 +23,7 @@ class QuartetWebPayExtension extends Extension
         $container->setParameter('quartet_webpay.api_base', $configs['api_base']);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $loader->load('services.yml');
     }
 }

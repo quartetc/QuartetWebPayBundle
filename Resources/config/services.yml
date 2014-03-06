@@ -1,0 +1,6 @@
+services:
+  quartet_webpay:
+    class: WebPay\WebPay
+    arguments:
+      - %quartet_webpay.api_secret%
+      - %quartet_webpay.api_base%
