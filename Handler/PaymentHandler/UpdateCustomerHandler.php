@@ -80,6 +80,6 @@ class UpdateCustomerHandler implements PaymentHandlerInterface
 
         $payment->setCard(null);
 
-        $this->customerManager->setCustomerId($user, $customer['id']);
+        $this->customerManager->setCustomerId($user, $customer->id);
     }
 }

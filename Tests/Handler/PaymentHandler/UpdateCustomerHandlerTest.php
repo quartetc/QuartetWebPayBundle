@@ -23,7 +23,11 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
             ->with(array(
                 'card'  => 'hoge'
             ))
-            ->will($this->returnValue(array('id' => 'registered customer id')));
+            ->will($this->returnCallback(function () {
+                $data = new \stdClass();
+                $data->id = 'registered customer id';
+                return $data;
+            }));
 
         $manager = $this->getCustomerManager();
         $manager
@@ -64,7 +68,11 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
         $action
             ->expects($this->once())
             ->method('execute')
-            ->will($this->returnValue(array('id' => 'hoge')));
+            ->will($this->returnCallback(function () {
+                $data = new \stdClass();
+                $data->id = 'hoge';
+                return $data;
+            }));
 
         $manager = $this->getCustomerManager();
         $manager
