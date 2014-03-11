@@ -76,4 +76,3 @@ class PaymentFormType extends AbstractType
         return 'quartet_webpay_payment';
     }
 }
- 

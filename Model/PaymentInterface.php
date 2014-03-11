@@ -1,4 +1,5 @@
 <?php
+
 namespace Quartet\WebPayBundle\Model;
 
 interface PaymentInterface

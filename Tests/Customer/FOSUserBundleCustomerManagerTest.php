@@ -89,4 +89,3 @@ class FOSUserBundleCustomerManagerTest extends \PHPUnit_Framework_TestCase
     }
 
 }
- 

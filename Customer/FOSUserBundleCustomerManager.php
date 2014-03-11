@@ -64,4 +64,3 @@ class FOSUserBundleCustomerManager implements CustomerManagerInterface
         return $user;
     }
 }
- 

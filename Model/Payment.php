@@ -48,4 +48,3 @@ class Payment implements PaymentInterface
         return $this->willRegister;
     }
 }
- 

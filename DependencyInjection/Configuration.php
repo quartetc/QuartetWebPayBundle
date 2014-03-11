@@ -123,4 +123,3 @@ class Configuration implements ConfigurationInterface
         ;
     }
 }
- 

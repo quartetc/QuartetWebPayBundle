@@ -45,4 +45,3 @@ class PaymentFormFactoryTest extends \PHPUnit_Framework_TestCase
         $factory->createForm(array('hoge' => 'fuga'));
     }
 }
- 

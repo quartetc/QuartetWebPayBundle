@@ -17,4 +17,3 @@ interface CustomerInterface
      */
     public function getWebPayCustomerId();
 }
- 

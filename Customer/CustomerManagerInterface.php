@@ -22,4 +22,3 @@ interface CustomerManagerInterface
      */
     public function setCustomerId(UserInterface $user, $customerId);
 }
- 

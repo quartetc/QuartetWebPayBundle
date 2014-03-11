@@ -92,4 +92,3 @@ class TokenFormType extends AbstractType
         return 'quartet_webpay_token';
     }
 }
- 

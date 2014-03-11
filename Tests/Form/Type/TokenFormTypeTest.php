@@ -120,4 +120,3 @@ class TokenFormTypeTest extends TypeTestCase
         ), $view->vars['webpay']);
     }
 }
- 
