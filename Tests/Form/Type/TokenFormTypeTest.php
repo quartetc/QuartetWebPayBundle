@@ -44,7 +44,7 @@ class TokenFormTypeTest extends TypeTestCase
      */
     public function testNameSet()
     {
-        $this->assertSame('webpay_token', $this->type->getName());
+        $this->assertSame('quartet_webpay_token', $this->type->getName());
     }
 
     /**
@@ -57,7 +57,7 @@ class TokenFormTypeTest extends TypeTestCase
         $this->assertNotEmpty($view->vars['webpay']);
         $this->assertSame(array(
             'data-key'              => 'public-api-key',
-            'data-token-name'       => 'webpay_token',
+            'data-token-name'       => 'quartet_webpay_token',
         ), $view->vars['webpay']);
     }
 
@@ -112,11 +112,11 @@ class TokenFormTypeTest extends TypeTestCase
         $this->assertNotEmpty($view->vars['webpay']);
         $this->assertSame(array(
             'data-key'              => 'public-api-key',
-            'data-token-name'       => 'webpay_token',
+            'data-token-name'       => 'quartet_webpay_token',
             'data-partial'          => 'false',
             'data-text'             => 'hoge',
             'data-submit-text'      => 'fuga',
-            'webpay_previous_token' => 'webpay_token',
+            'webpay_previous_token' => 'quartet_webpay_token',
         ), $view->vars['webpay']);
     }
 }

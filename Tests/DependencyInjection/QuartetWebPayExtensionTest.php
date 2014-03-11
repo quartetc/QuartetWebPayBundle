@@ -111,6 +111,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         return array(
             'api_secret'    => 'my_api_secret_key',
             'api_public'    => 'my_api_public_key',
+            'checkout'      => null,
         );
     }
 }

@@ -1,0 +1,12 @@
+services:
+  quartet_webpay.checkout.payment.form_factory:
+    class: Quartet\WebPayBundle\Form\Factory\PaymentFormFactory
+    arguments:
+      - @form.factory
+
+  quartet_webpay.checkout.payment.handler.update_customer:
+    class: Quartet\WebPayBundle\Handler\PaymentHandler\UpdateCustomerHandler
+    arguments:
+      - @quartet_webpay
+      - @security.context
+      - @quartet_webpay.customer_manager

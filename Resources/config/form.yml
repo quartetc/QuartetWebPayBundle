@@ -4,4 +4,11 @@ services:
     arguments:
       - %quartet_webpay.api_public%
     tags:
-      - { name: form.type, alias: webpay_token }
+      - { name: form.type, alias: quartet_webpay_token }
+
+  quartet_webpay.form_type.payment:
+    class: Quartet\WebPayBundle\Form\Type\PaymentFormType
+    arguments:
+      - %quartet_webpay.checkout.payment_class%
+    tags:
+      - { name: form.type, alias: quartet_webpay_payment }

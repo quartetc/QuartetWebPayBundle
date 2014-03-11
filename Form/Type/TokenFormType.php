@@ -89,7 +89,7 @@ class TokenFormType extends AbstractType
      */
     public function getName()
     {
-        return 'webpay_token';
+        return 'quartet_webpay_token';
     }
 }
  

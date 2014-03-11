@@ -1,0 +1,15 @@
+quartet_webpay_checkout:
+  path: /checkout
+  defaults: { _controller: QuartetWebPayBundle:Checkout:index }
+
+quartet_webpay_checkout_payment:
+  path: /checkout/payment
+  defaults: { _controller: QuartetWebPayBundle:Checkout:payment }
+
+quartet_webpay_checkout_confirm:
+  path: /checkout/confirm
+  defaults: { _controller: QuartetWebPayBundle:Checkout:confirm }
+
+quartet_webpay_checkout_confirmed:
+  path: /checkout/confirmed
+  defaults: { _controller: QuartetWebPayBundle:Checkout:registerPayment }

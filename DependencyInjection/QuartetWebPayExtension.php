@@ -31,6 +31,10 @@ class QuartetWebPayExtension extends Extension
             $this->loadForm($configs['form'], $container, $loader);
         }
 
+        if (!empty($configs['checkout'])) {
+            $this->loadCheckout($configs['checkout'], $container, $loader);
+        }
+
         if (!empty($configs['customer'])) {
             $this->loadCustomer($configs['customer'], $container, $loader);
         }
@@ -50,6 +54,31 @@ class QuartetWebPayExtension extends Extension
 
     /**
      * @param array            $configs
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
+     */
+    private function loadCheckout(array $configs, ContainerBuilder $container, LoaderInterface $loader)
+    {
+        $loader->load('checkout.yml');
+
+        $container->setParameter('quartet_webpay.checkout.payment_class', $configs['payment_class']);
+
+        $this->loadCheckoutPayment($configs['payment'], $container);
+    }
+
+    /**
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     */
+    private function loadCheckoutPayment(array $configs, ContainerBuilder $container)
+    {
+        $definition = $container->getDefinition('quartet_webpay.checkout.payment.form_factory');
+        $definition->addArgument($configs['form']['name']);
+        $definition->addArgument($configs['form']['type']);
+        $definition->addArgument($configs['tokenize']);
+        $definition->addArgument($configs['persistence'] === 'optional');
+    }
+
     /**
      * @param array            $configs
      * @param ContainerBuilder $container
