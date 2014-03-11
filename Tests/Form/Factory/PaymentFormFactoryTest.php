@@ -36,6 +36,8 @@ class PaymentFormFactoryTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('createNamed')
             ->with('form_name', 'quartet_webpay_payment', array('hoge' => 'fuga'), array(
+                'tokenize_payment'          => false,
+                'show_registration_option'  => false,
             ));
 
         $factory = new PaymentFormFactory($factory, 'form_name', 'quartet_webpay_payment', false, false);

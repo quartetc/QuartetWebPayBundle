@@ -4,8 +4,11 @@ namespace Quartet\WebPayBundle\Tests\Controller;
 
 
 use Quartet\WebPayBundle\Controller\CheckoutController;
+use Quartet\WebPayBundle\Form\Type\PaymentFormType;
+use Quartet\WebPayBundle\Form\Type\TokenFormType;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -63,7 +66,7 @@ class CheckoutControllerTest extends WebTestCase
      * @test
      * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
-    public function testThrowExceptionUnlessAuthentication()
+    public function testThrowExceptionUnlessAuthenticationIn()
     {
         $securityContext = $this->buildSecurityContextWithUser(null);
 
@@ -77,8 +80,7 @@ class CheckoutControllerTest extends WebTestCase
      */
     public function testIndexActionRespondRedirectionToPaymentActionWithNonCustomer()
     {
-        $user = $this->getUser();
-        $this->container->set('security.context', $this->buildSecurityContextWithUser($user));
+        $this->setSecurityContextWithUser($user = $this->getUser());
 
         $customerManager = $this->getMock('Quartet\WebPayBundle\Customer\CustomerManagerInterface');
         $customerManager
@@ -108,8 +110,7 @@ class CheckoutControllerTest extends WebTestCase
      */
     public function testIndexActionRespondRedirectToConfirmActionWithCustomer()
     {
-        $user = $this->getUser();
-        $this->container->set('security.context', $this->buildSecurityContextWithUser($user));
+        $this->setSecurityContextWithUser($user = $this->getUser());
 
         $customerManager = $this->getMock('Quartet\WebPayBundle\Customer\CustomerManagerInterface');
         $customerManager
@@ -132,6 +133,25 @@ class CheckoutControllerTest extends WebTestCase
         $response = $this->controller->indexAction();
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\RedirectResponse', $response);
         $this->assertSame('hoge', $response->getTargetUrl());
+    }
+
+    /**
+     * @test
+     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    public function testThrowExceptionUnlessAuthenticationInPaymentAction()
+    {
+        $this->setSecurityContextWithUser();
+
+        $this->controller->paymentAction(new Request());
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    private function setSecurityContextWithUser(UserInterface $user = null)
+    {
+        $this->container->set('security.context', $this->buildSecurityContextWithUser($user));
     }
 
     /**

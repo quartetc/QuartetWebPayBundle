@@ -27,6 +27,8 @@ class CheckoutController extends Controller
 
     public function paymentAction(Request $request)
     {
+        $user = $this->getUserOrThrowException();
+
         /** @var $formFactory FactoryInterface */
         $formFactory = $this->get('quartet_webpay.checkout.payment.form_factory');
 
