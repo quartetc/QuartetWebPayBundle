@@ -1,6 +1,6 @@
 <?php
 
-namespace Quartet\Bundle\WebPayBundle\Form\Type;
+namespace Quartet\WebPayBundle\Form\Type;
 
 
 use Symfony\Component\Form\AbstractType;

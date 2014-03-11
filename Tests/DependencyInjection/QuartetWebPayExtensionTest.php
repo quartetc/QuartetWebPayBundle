@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Quartet\Bundle\WebPayBundle\Tests\DependencyInjection;
+namespace Quartet\WebPayBundle\Tests\DependencyInjection;
 
 
-use Quartet\Bundle\WebPayBundle\DependencyInjection\QuartetWebPayExtension;
+use Quartet\WebPayBundle\DependencyInjection\QuartetWebPayExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase

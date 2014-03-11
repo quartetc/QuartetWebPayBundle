@@ -1,6 +1,6 @@
 <?php
 
-namespace Quartet\Bundle\WebPayBundle\DependencyInjection\Compiler;
+namespace Quartet\WebPayBundle\DependencyInjection\Compiler;
 
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

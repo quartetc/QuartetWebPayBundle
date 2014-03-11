@@ -1,9 +1,9 @@
 <?php
 
-namespace Quartet\Bundle\WebPayBundle\Tests\Form\Type;
+namespace Quartet\WebPayBundle\Tests\Form\Type;
 
 
-use Quartet\Bundle\WebPayBundle\Form\Type\TokenFormType;
+use Quartet\WebPayBundle\Form\Type\TokenFormType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 class TokenFormTypeTest extends TypeTestCase

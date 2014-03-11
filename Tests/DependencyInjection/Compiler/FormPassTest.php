@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Quartet\Bundle\WebPayBundle\Tests\DependencyInjection\Compiler;
+namespace Quartet\WebPayBundle\Tests\DependencyInjection\Compiler;
 
 
-use Quartet\Bundle\WebPayBundle\DependencyInjection\Compiler\FormPass;
+use Quartet\WebPayBundle\DependencyInjection\Compiler\FormPass;
 
 class FormPassTest extends \PHPUnit_Framework_TestCase
 {

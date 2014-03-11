@@ -1,6 +1,6 @@
 <?php
 
-namespace Quartet\Bundle\WebPayBundle\DependencyInjection;
+namespace Quartet\WebPayBundle\DependencyInjection;
 
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;

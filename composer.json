@@ -20,8 +20,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Quartet\\Bundle\\WebPayBundle": ""
+            "Quartet\\WebPayBundle": ""
         }
     },
-    "target-dir": "Quartet/Bundle/WebPayBundle"
+    "target-dir": "Quartet/WebPayBundle"
 }

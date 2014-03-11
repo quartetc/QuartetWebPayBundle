@@ -1,9 +1,9 @@
 <?php
 
-namespace Quartet\Bundle\WebPayBundle;
+namespace Quartet\WebPayBundle;
 
-use Quartet\Bundle\WebPayBundle\DependencyInjection\Compiler\FormPass;
-use Quartet\Bundle\WebPayBundle\DependencyInjection\QuartetWebPayExtension;
+use Quartet\WebPayBundle\DependencyInjection\Compiler\FormPass;
+use Quartet\WebPayBundle\DependencyInjection\QuartetWebPayExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
