@@ -18,6 +18,7 @@ class Configuration implements ConfigurationInterface
         $root = $builder->root('quartet_webpay');
 
         $this->addGlobalConfig($root);
+        $this->addCustomerConfig($root);
         $this->addTemplatingConfig($root);
 
         return $builder;
@@ -48,6 +49,19 @@ class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
+    private function addCustomerConfig(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('customer')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('manager')->defaultValue('quartet_webpay.customer_manager.fos_user')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
     private function addTemplatingConfig(ArrayNodeDefinition $node)
     {
         $node

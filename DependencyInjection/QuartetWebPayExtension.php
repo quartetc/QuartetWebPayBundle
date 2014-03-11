@@ -30,6 +30,10 @@ class QuartetWebPayExtension extends Extension
         if (!empty($configs['form'])) {
             $this->loadForm($configs['form'], $container, $loader);
         }
+
+        if (!empty($configs['customer'])) {
+            $this->loadCustomer($configs['customer'], $container, $loader);
+        }
     }
 
     /**
@@ -42,6 +46,20 @@ class QuartetWebPayExtension extends Extension
         $loader->load('form.yml');
 
         $container->setParameter('quartet_webpay.form.templating', $configs['templating']);
+    }
+
+    /**
+     * @param array            $configs
+    /**
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
+     */
+    private function loadCustomer(array $configs, ContainerBuilder $container, LoaderInterface $loader)
+    {
+        $loader->load('customer.yml');
+
+        $container->setAlias('quartet_webpay.customer_manager', $configs['manager']);
     }
 
     /**
