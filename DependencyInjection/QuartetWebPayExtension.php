@@ -64,6 +64,7 @@ class QuartetWebPayExtension extends Extension
         $container->setParameter('quartet_webpay.checkout.payment_class', $configs['payment_class']);
 
         $this->loadCheckoutPayment($configs['payment'], $container);
+        $this->loadCheckoutService($configs['service'], $container);
     }
 
     /**
@@ -72,11 +73,27 @@ class QuartetWebPayExtension extends Extension
      */
     private function loadCheckoutPayment(array $configs, ContainerBuilder $container)
     {
+        $container->setParameter('quartet_webpay.checkout.payment.tokenize', $configs['tokenize']);
+        $container->setParameter('quartet_webpay.checkout.payment.persistence', $configs['persistence']);
+
         $definition = $container->getDefinition('quartet_webpay.checkout.payment.form_factory');
         $definition->addArgument($configs['form']['name']);
         $definition->addArgument($configs['form']['type']);
         $definition->addArgument($configs['tokenize']);
         $definition->addArgument($configs['persistence'] === 'optional');
+
+        $container->setAlias('quartet_webpay.checkout.payment_handler', $configs['handler']);
+    }
+
+    /**
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     */
+    private function loadCheckoutService(array $configs, ContainerBuilder $container)
+    {
+        foreach ($configs as $name => $id) {
+            $container->setAlias(sprintf('quartet_webpay.checkout.%s', $name), $id);
+        }
     }
 
     /**
@@ -85,7 +102,7 @@ class QuartetWebPayExtension extends Extension
      * @param LoaderInterface  $loader
      */
     private function loadCustomer(array $configs, ContainerBuilder $container, LoaderInterface $loader)
-    {
+     {
         $loader->load('customer.yml');
 
         $container->setAlias('quartet_webpay.customer_manager', $configs['manager']);

@@ -4,3 +4,14 @@ services:
     arguments:
       - %quartet_webpay.api_secret%
       - %quartet_webpay.api_base%
+
+  quartet_webpay.action.abstract:
+    public: false
+    abstract: true
+    class: Quartet\WebPayBundle\WebPay\AbstractWebPayAction
+    arguments:
+      - @quartet_webpay
+
+  quartet_webpay.action.create_customer:
+    parent: quartet_webpay.action.abstract
+    class: Quartet\WebPayBundle\WebPay\CreateCustomerAction
