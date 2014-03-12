@@ -18,13 +18,13 @@ class ChainHandlerTest extends \PHPUnit_Framework_TestCase
         $handler1 = $this->getMock('Quartet\WebPayBundle\Handler\PaymentHandlerInterface');
         $handler1
             ->expects($this->once())
-            ->method('handle')
+            ->method('process')
             ->with($payment, $user);
 
         $handler2 = $this->getMock('Quartet\WebPayBundle\Handler\PaymentHandlerInterface');
         $handler2
             ->expects($this->once())
-            ->method('handle')
+            ->method('process')
             ->with($payment, $user);
 
         $handler = new ChainHandler(array($handler1, $handler2));
