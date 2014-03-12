@@ -100,6 +100,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('payment_manager')->defaultValue('quartet_webpay.checkout.payment_manager.session')->end()
+                                ->scalarNode('charge_manager')->defaultValue('quartet_webpay.checkout.charge_manager.session')->end()
                             ->end()
                         ->end()
                     ->end()

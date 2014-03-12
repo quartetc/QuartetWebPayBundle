@@ -1,8 +1,28 @@
 services:
+  # Payment form
   quartet_webpay.checkout.payment.form_factory:
     class: Quartet\WebPayBundle\Form\Factory\PaymentFormFactory
     arguments:
       - @form.factory
+
+  # Payment manager
+  quartet_webpay.checkout.payment_manager.session:
+    public: false
+    class: Quartet\WebPayBundle\Session\PaymentManager
+    arguments:
+      - @session
+
+  # Charge manager
+  quartet_webpay.checkout.charge_manager.session:
+    public: false
+    class: Quartet\WebPayBundle\Session\ChargeManager
+    arguments:
+      - @session
+
+  # PaymentHandler
+  quartet_webpay.checkout.handler.chain:
+    abstract: true
+    class: Quartet\WebPayBundle\Handler\PaymentHandler\ChainHandler
 
   quartet_webpay.checkout.payment.handler.update_customer:
     class: Quartet\WebPayBundle\Handler\PaymentHandler\UpdateCustomerHandler
@@ -10,16 +30,6 @@ services:
       - @quartet_webpay
       - @security.context
       - @quartet_webpay.customer_manager
-
-  quartet_webpay.checkout.payment_manager.session:
-    public: false
-    class: Quartet\WebPayBundle\Session\PaymentManager
-    arguments:
-      - @session
-
-  quartet_webpay.checkout.handler.chain:
-    abstract: true
-    class: Quartet\WebPayBundle\Handler\PaymentHandler\ChainHandler
 
   quartet_webpay.checkout.payment.handler.default:
     public: false
