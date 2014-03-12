@@ -3,7 +3,7 @@
 namespace Quartet\WebPayBundle\Controller;
 
 
-use Quartet\WebPayBundle\Customer\CustomerManagerInterface;
+use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Quartet\WebPayBundle\Form\Factory\FactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

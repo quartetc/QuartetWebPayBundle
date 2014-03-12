@@ -4,10 +4,9 @@
 namespace Quartet\WebPayBundle\Tests\Customer;
 
 
-use Quartet\WebPayBundle\Customer\FOSUserBundleCustomerManager;
+use Quartet\WebPayBundle\FOSUser\CustomerManager;
 
-
-class FOSUserBundleCustomerManagerTest extends \PHPUnit_Framework_TestCase
+class CustomerManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -25,7 +24,7 @@ class FOSUserBundleCustomerManagerTest extends \PHPUnit_Framework_TestCase
             ->with($username)
             ->will($this->returnValue($user));
 
-        $manager = new FOSUserBundleCustomerManager($fos);
+        $manager = new CustomerManager($fos);
 
         $manager->getCustomerId($user);
     }
@@ -36,7 +35,7 @@ class FOSUserBundleCustomerManagerTest extends \PHPUnit_Framework_TestCase
     public function testReturnNullUnlessUserFound()
     {
         $fos = $this->getFosUserManager(null);
-        $manager = new FOSUserBundleCustomerManager($fos);
+        $manager = new CustomerManager($fos);
 
         $this->assertNull($manager->getCustomerId($this->getUser('hoge')));
     }
@@ -54,7 +53,7 @@ class FOSUserBundleCustomerManagerTest extends \PHPUnit_Framework_TestCase
 
         $fos = $this->getFosUserManager($customer);
 
-        $manager = new FOSUserBundleCustomerManager($fos);
+        $manager = new CustomerManager($fos);
         $this->assertSame(30, $manager->getCustomerId($this->getUser('hoge')));
     }
 

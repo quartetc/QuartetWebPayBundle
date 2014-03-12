@@ -82,7 +82,7 @@ class CheckoutControllerTest extends WebTestCase
     {
         $this->setSecurityContextWithUser($user = $this->getUser());
 
-        $customerManager = $this->getMock('Quartet\WebPayBundle\Customer\CustomerManagerInterface');
+        $customerManager = $this->getMock('Quartet\WebPayBundle\Model\CustomerManagerInterface');
         $customerManager
             ->expects($this->any())
             ->method('getWebPayCustomerId')
@@ -112,7 +112,7 @@ class CheckoutControllerTest extends WebTestCase
     {
         $this->setSecurityContextWithUser($user = $this->getUser());
 
-        $customerManager = $this->getMock('Quartet\WebPayBundle\Customer\CustomerManagerInterface');
+        $customerManager = $this->getMock('Quartet\WebPayBundle\Model\CustomerManagerInterface');
         $customerManager
             ->expects($this->any())
             ->method('getCustomerId')

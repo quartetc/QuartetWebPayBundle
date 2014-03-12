@@ -1,21 +1,19 @@
 <?php
 
-
 namespace Quartet\WebPayBundle\Handler\PaymentHandler;
 
 
-use Quartet\WebPayBundle\Customer\CustomerManagerInterface;
+use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Quartet\WebPayBundle\Handler\PaymentHandlerInterface;
 use Quartet\WebPayBundle\Model\PaymentInterface;
 use Quartet\WebPayBundle\WebPay\CreateCustomerAction;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use WebPay\WebPay;
 
 class UpdateCustomerHandler implements PaymentHandlerInterface
 {
     /**
-     * @var \Quartet\WebPayBundle\Customer\CustomerManagerInterface
+     * @var \Quartet\WebPayBundle\Model\CustomerManagerInterface
      */
     private $customerManager;
 
@@ -61,11 +59,14 @@ class UpdateCustomerHandler implements PaymentHandlerInterface
             return;
         }
 
-        if ('always' !== $this->persistence) {
-            throw new \RuntimeException(sprintf('Invalid persistence strategy "%s"', $this->persistence));
+        if ('always' === $this->persistence) {
+
+            $this->createAndUpdateCustomer($payment, $user);
+
+            return;
         }
 
-        $this->createAndUpdateCustomer($payment, $user);
+        throw new \RuntimeException(sprintf('Invalid persistence strategy "%s"', $this->persistence));
     }
 
     /**

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Quartet\WebPayBundle\Model;
 
 

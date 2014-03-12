@@ -1,6 +1,6 @@
 <?php
 
-namespace Quartet\WebPayBundle\Customer;
+namespace Quartet\WebPayBundle\Model;
 
 
 use Symfony\Component\Security\Core\User\UserInterface;

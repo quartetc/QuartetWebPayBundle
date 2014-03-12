@@ -1,6 +1,6 @@
 services:
   quartet_webpay.customer_manager.fos_user:
     public: false
-    class: Quartet\WebPayBundle\Customer\FOSUserBundleCustomerManager
+    class: Quartet\WebPayBundle\FOSUser\CustomerManager
     arguments:
       - @fos_user.user_manager

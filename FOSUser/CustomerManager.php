@@ -1,13 +1,14 @@
 <?php
 
-namespace Quartet\WebPayBundle\Customer;
+namespace Quartet\WebPayBundle\FOSUser;
 
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use Quartet\WebPayBundle\Model\CustomerInterface;
+use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class FOSUserBundleCustomerManager implements CustomerManagerInterface
+class CustomerManager implements CustomerManagerInterface
 {
     /**
      * @var \FOS\UserBundle\Model\UserManagerInterface

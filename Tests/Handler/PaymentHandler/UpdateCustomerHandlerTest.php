@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Quartet\WebPayBundle\Tests\Handler\PaymentHandler;
 
 
@@ -101,7 +100,7 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
 
     private function getCustomerManager()
     {
-        return $this->getMock('Quartet\WebPayBundle\Customer\CustomerManagerInterface');
+        return $this->getMock('Quartet\WebPayBundle\Model\CustomerManagerInterface');
     }
 
     private function getWebPayAction($class = 'Quartet\WebPayBundle\WebPay\CreateCustomerAction')
