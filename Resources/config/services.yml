@@ -13,12 +13,19 @@ services:
     arguments:
       - @quartet_webpay
 
+  quartet_webpay.action.factory:
+    class: Quartet\WebPayBundle\WebPay\ActionFactory
+
   quartet_webpay.action.create_customer:
     public: false
     parent: quartet_webpay.action.abstract
     class: Quartet\WebPayBundle\WebPay\CreateCustomerAction
+    tags:
+      - { name: quartet_webpay.webpay_action, alias: create_customer }
 
   quartet_webpay.action.create_charge:
     public: false
     parent: quartet_webpay.action.abstract
     class: Quartet\WebPayBundle\WebPay\CreateChargeAction
+    tags:
+      - { name: quartet_webpay.webpay_action, alias: create_charge }

@@ -2,6 +2,7 @@
 
 namespace Quartet\WebPayBundle;
 
+use Quartet\WebPayBundle\DependencyInjection\Compiler\ActionPass;
 use Quartet\WebPayBundle\DependencyInjection\Compiler\FormPass;
 use Quartet\WebPayBundle\DependencyInjection\QuartetWebPayExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,5 +26,6 @@ class QuartetWebPayBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new FormPass());
+        $container->addCompilerPass(new ActionPass());
     }
 }

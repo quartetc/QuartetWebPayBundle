@@ -59,3 +59,5 @@ services:
       - @quartet_webpay
       - @quartet_webpay.customer_manager
       - @quartet_webpay.checkout.payment_manager
+    tags:
+      - { name: quartet_webpay.webpay_action, alias: checkout }
