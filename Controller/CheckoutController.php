@@ -3,13 +3,11 @@
 namespace Quartet\WebPayBundle\Controller;
 
 
-use Quartet\WebPayBundle\Model\ChargeInterface;
-use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Quartet\WebPayBundle\Form\Factory\FactoryInterface;
+use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class CheckoutController extends Controller
@@ -65,21 +63,16 @@ class CheckoutController extends Controller
 
             $charge = $this->get('quartet_webpay.checkout.charge_manager')->removeCharge($user);
 
-            if ($customer = $this->get('quartet_webpay.customer_manager')->getCustomerId($user)) {
+            $actionFactory = $this->get('quartet_webpay.action.factory');
 
-                $this->checkout($charge, array('customer' => $customer));
+            $action = $actionFactory->getAction('checkout');
 
-                return $this->redirect($this->generateUrl('quartet_webpay_checkout_confirmed'));
-            }
+            $action->execute(array(
+                'user'      => $user,
+                'charge'    => $charge,
+            ));
 
-            if ($payment = $payment = $this->get('quartet_webpay.checkout.payment_manager')->remove()) {
-
-                $this->checkout($charge, array('card' => $payment->getCard()));
-
-                return $this->redirect($this->generateUrl('quartet_webpay_checkout_confirmed'));
-            }
-
-            throw new BadRequestHttpException;
+            return $this->redirect($this->generateUrl('quartet_webpay_checkout_confirmed'));
         }
 
         $form = $this->createForm('form');
@@ -90,17 +83,6 @@ class CheckoutController extends Controller
             'form'      => $form->createView(),
             'charge'    => $charge,
         ));
-    }
-
-    private function checkout(ChargeInterface $charge, array $options)
-    {
-        $this->get('quartet_webpay')->charges->create(array(
-            'amount'        => $charge->getAmount(),
-            'currency'      => $charge->getCurrency(),
-            'description'   => $charge->getDescription(),
-            'expire_days'   => $charge->getExpireDays(),
-            'uuid'          => $charge->getUUID(),
-        ) + $options);
     }
 
     public function confirmedAction()
