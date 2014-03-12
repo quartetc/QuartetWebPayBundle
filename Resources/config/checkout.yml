@@ -50,3 +50,12 @@ services:
     class: Quartet\WebPayBundle\Handler\PaymentHandler\StorePaymentHandler
     arguments:
       - @quartet_webpay.checkout.payment_manager
+
+  # WebPay Action
+  quartet_webpay.checkout.action.checkout:
+    public: false
+    class: Quartet\WebPayBundle\WebPay\CheckoutAction
+    arguments:
+      - @quartet_webpay
+      - @quartet_webpay.customer_manager
+      - @quartet_webpay.checkout.payment_manager
