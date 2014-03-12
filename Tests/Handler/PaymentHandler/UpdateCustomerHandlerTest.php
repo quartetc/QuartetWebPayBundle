@@ -103,7 +103,7 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
         return $this->getMock('Quartet\WebPayBundle\Model\CustomerManagerInterface');
     }
 
-    private function getWebPayAction($class = 'Quartet\WebPayBundle\WebPay\CreateCustomerAction')
+    private function getWebPayAction($class = 'Quartet\WebPayBundle\WebPay\WebPayActionInterface')
     {
         return $this
             ->getMockBuilder($class)

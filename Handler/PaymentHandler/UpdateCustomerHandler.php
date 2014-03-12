@@ -3,10 +3,10 @@
 namespace Quartet\WebPayBundle\Handler\PaymentHandler;
 
 
-use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Quartet\WebPayBundle\Handler\PaymentHandlerInterface;
+use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Quartet\WebPayBundle\Model\PaymentInterface;
-use Quartet\WebPayBundle\WebPay\CreateCustomerAction;
+use Quartet\WebPayBundle\WebPay\WebPayActionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -18,7 +18,7 @@ class UpdateCustomerHandler implements PaymentHandlerInterface
     private $customerManager;
 
     /**
-     * @var \WebPay\WebPay
+     * @var \Quartet\WebPayBundle\WebPay\WebPayActionInterface
      */
     private $webPayAction;
 
@@ -28,11 +28,11 @@ class UpdateCustomerHandler implements PaymentHandlerInterface
     private $persistence;
 
     /**
-     * @param CreateCustomerAction     $webPayAction
+     * @param WebPayActionInterface    $webPayAction
      * @param CustomerManagerInterface $customerManager
      * @param string                   $persistence
      */
-    public function __construct(CreateCustomerAction $webPayAction, CustomerManagerInterface $customerManager, $persistence)
+    public function __construct(WebPayActionInterface $webPayAction, CustomerManagerInterface $customerManager, $persistence)
     {
         $this->webPayAction     = $webPayAction;
         $this->customerManager  = $customerManager;
