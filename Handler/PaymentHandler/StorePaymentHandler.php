@@ -28,6 +28,10 @@ class StorePaymentHandler implements PaymentHandlerInterface
      */
     public function process(PaymentInterface $payment, UserInterface $user)
     {
-        $this->manager->put($payment);
+        if ($payment->getCard()) {
+            $this->manager->put($payment);
+        } else {
+            $this->manager->remove();
+        }
     }
 }
