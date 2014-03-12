@@ -1,0 +1,21 @@
+{% extends 'QuartetWebPayBundle::layout.html.twig' %}
+
+{% trans_default_domain 'QuartetWebPayBundle' %}
+
+{% block quartet_webpay_content %}
+    <dl>
+        <dt>amount</dt>
+        <dd>{{ charge.amount }}</dd>
+        <dt>currency</dt>
+        <dd>{{ charge.currency }}</dd>
+        <dt>description</dt>
+        <dd>{{ charge.description }}</dd>
+    </dl>
+
+    <form action="{{ path('quartet_webpay_checkout_confirm') }}" method="POST">
+        {{ form_widget(form) }}
+        <div>
+            <button type="submit">{{ 'quartet_webpay.checkout.confirm.submit'|trans }}</button>
+        </div>
+    </form>
+{% endblock %}

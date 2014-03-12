@@ -12,4 +12,5 @@ quartet_webpay_checkout_confirm:
 
 quartet_webpay_checkout_confirmed:
   path: /checkout/confirmed
-  defaults: { _controller: QuartetWebPayBundle:Checkout:registerPayment }
+  defaults: { _controller: QuartetWebPayBundle:Checkout:confirmed }
+  methods: [GET]

@@ -3,10 +3,13 @@
 namespace Quartet\WebPayBundle\Controller;
 
 
+use Quartet\WebPayBundle\Model\ChargeInterface;
 use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Quartet\WebPayBundle\Form\Factory\FactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class CheckoutController extends Controller
@@ -53,11 +56,80 @@ class CheckoutController extends Controller
         ));
     }
 
-    public function confirmAction()
+    public function confirmAction(Request $request)
     {
+        $user = $this->getUserOrThrowException();
+        $this->ensureAbleToCheckoutOrThrowException();
 
+        if ('POST' === $request->getMethod()) {
+
+            $charge = $this->get('quartet_webpay.checkout.charge_manager')->removeCharge($user);
+
+            if ($customer = $this->get('quartet_webpay.customer_manager')->getCustomerId($user)) {
+
+                $this->checkout($charge, array('customer' => $customer));
+
+                return $this->redirect($this->generateUrl('quartet_webpay_checkout_confirmed'));
+            }
+
+            if ($payment = $payment = $this->get('quartet_webpay.checkout.payment_manager')->remove()) {
+
+                $this->checkout($charge, array('card' => $payment->getCard()));
+
+                return $this->redirect($this->generateUrl('quartet_webpay_checkout_confirmed'));
+            }
+
+            throw new BadRequestHttpException;
+        }
+
+        $form = $this->createForm('form');
+
+        $charge = $this->get('quartet_webpay.checkout.charge_manager')->getCharge();
+
+        return $this->render('QuartetWebPayBundle:Checkout:confirm.html.twig', array(
+            'form'      => $form->createView(),
+            'charge'    => $charge,
+        ));
     }
 
+    private function checkout(ChargeInterface $charge, array $options)
+    {
+        $this->get('quartet_webpay')->charges->create(array(
+            'amount'        => $charge->getAmount(),
+            'currency'      => $charge->getCurrency(),
+            'description'   => $charge->getDescription(),
+            'expire_days'   => $charge->getExpireDays(),
+            'uuid'          => $charge->getUUID(),
+        ) + $options);
+    }
+
+    public function confirmedAction()
+    {
+        return $this->render('QuartetWebPayBundle:Checkout:confirmed.html.twig', array(
+
+        ));
+    }
+
+    /**
+     * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+     */
+    private function ensureAbleToCheckoutOrThrowException()
+    {
+        $chargeManager = $this->get('quartet_webpay.checkout.charge_manager');
+
+        if (!$chargeManager->hasCharge()) {
+            throw new BadRequestHttpException;
+        }
+
+        $user = $this->getUserOrThrowException();
+
+        $customerManager = $this->get('quartet_webpay.customer_manager');
+        $paymentManager = $this->get('quartet_webpay.checkout.payment_manager');
+
+        if (!$customerManager->getCustomerId($user) && !$paymentManager->has()) {
+            throw new BadRequestHttpException;
+        }
+    }
 
     /**
      * @return mixed
