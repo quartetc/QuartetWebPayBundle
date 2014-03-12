@@ -28,6 +28,6 @@ class ChainHandlerTest extends \PHPUnit_Framework_TestCase
             ->with($payment, $user);
 
         $handler = new ChainHandler(array($handler1, $handler2));
-        $handler->handle($payment, $user);
+        $handler->process($payment, $user);
     }
 }

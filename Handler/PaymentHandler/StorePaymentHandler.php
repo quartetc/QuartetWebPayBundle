@@ -26,7 +26,7 @@ class StorePaymentHandler implements PaymentHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(PaymentInterface $payment, UserInterface $user)
+    public function process(PaymentInterface $payment, UserInterface $user)
     {
         $this->manager->put($payment);
     }

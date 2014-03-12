@@ -36,7 +36,7 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
 
         $handler = new UpdateCustomerHandler($action, $manager, 'always');
 
-        $handler->handle($this->getPayment('hoge', false), $user);
+        $handler->process($this->getPayment('hoge', false), $user);
     }
 
     /**
@@ -52,8 +52,8 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
         $manager->expects($this->never())->method('setCustomerId');
 
         $handler = new UpdateCustomerHandler($action, $manager, 'never');
-        $handler->handle($this->getPayment('hoge', true), $user);
-        $handler->handle($this->getPayment('hoge', false), $user);
+        $handler->process($this->getPayment('hoge', true), $user);
+        $handler->process($this->getPayment('hoge', false), $user);
     }
 
     /**
@@ -79,7 +79,7 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('setCustomerId');
 
         $handler = new UpdateCustomerHandler($action, $manager, 'optional');
-        $handler->handle($this->getPayment('hoge', true), $user);
+        $handler->process($this->getPayment('hoge', true), $user);
     }
 
     /**
@@ -95,7 +95,7 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
         $manager->expects($this->never())->method('setCustomerId');
 
         $handler = new UpdateCustomerHandler($action, $manager, 'optional');
-        $handler->handle($this->getPayment('hoge', false), $user);
+        $handler->process($this->getPayment('hoge', false), $user);
     }
 
     private function getCustomerManager()

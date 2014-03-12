@@ -45,7 +45,7 @@ class CheckoutController extends Controller
 
                 $payment = $form->getData();
 
-                $this->get('quartet_webpay.checkout.payment_handler')->handle($payment, $user);
+                $this->get('quartet_webpay.checkout.payment_handler')->process($payment, $user);
 
                 return $this->redirect($this->generateUrl('quartet_webpay_checkout_confirm'));
             }

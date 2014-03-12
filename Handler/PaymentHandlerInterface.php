@@ -14,5 +14,5 @@ interface PaymentHandlerInterface
      *
      * @return void
      */
-    public function handle(PaymentInterface $payment, UserInterface $user);
+    public function process(PaymentInterface $payment, UserInterface $user);
 }

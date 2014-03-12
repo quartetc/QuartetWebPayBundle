@@ -24,6 +24,6 @@ class StorePaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('put')
             ->with($payment);
 
-        $handler->handle($payment, $user);
+        $handler->process($payment, $user);
     }
 }
