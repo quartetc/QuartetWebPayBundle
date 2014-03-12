@@ -5,6 +5,7 @@ services:
       - %quartet_webpay.api_secret%
       - %quartet_webpay.api_base%
 
+  # WebPay action
   quartet_webpay.action.abstract:
     public: false
     abstract: true
@@ -13,5 +14,11 @@ services:
       - @quartet_webpay
 
   quartet_webpay.action.create_customer:
+    public: false
     parent: quartet_webpay.action.abstract
     class: Quartet\WebPayBundle\WebPay\CreateCustomerAction
+
+  quartet_webpay.action.create_charge:
+    public: false
+    parent: quartet_webpay.action.abstract
+    class: Quartet\WebPayBundle\WebPay\CreateChargeAction

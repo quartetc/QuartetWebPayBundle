@@ -3,15 +3,27 @@
 namespace Quartet\WebPayBundle\WebPay;
 
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 class CreateCustomerAction extends AbstractWebPayAction
 {
     /**
-     * @param array $values
-     *
-     * @return mixed|\WebPay\Model\Customer
+     * {@inheritdoc}
      */
-    public function execute(array $values)
+    public function executeAction(array $values)
     {
         return $this->webPay->customers->create($values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setDefaultOption(OptionsResolverInterface $resolver)
+    {
+        $resolver
+            ->setOptional(array(
+                'card', 'email', 'description', 'uuid'
+            ))
+        ;
     }
 }
