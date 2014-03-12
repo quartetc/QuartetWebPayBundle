@@ -45,7 +45,7 @@ abstract class AbstractSessionManager
     /**
      * @return bool
      */
-    protected  function hasValue()
+    protected function hasValue()
     {
         return $this->session->has($this->generateKey());
     }

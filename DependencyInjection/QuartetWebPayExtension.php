@@ -102,7 +102,7 @@ class QuartetWebPayExtension extends Extension
      * @param LoaderInterface  $loader
      */
     private function loadCustomer(array $configs, ContainerBuilder $container, LoaderInterface $loader)
-     {
+    {
         $loader->load('customer.yml');
 
         $container->setAlias('quartet_webpay.customer_manager', $configs['manager']);

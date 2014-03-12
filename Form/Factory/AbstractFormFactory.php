@@ -10,7 +10,7 @@ abstract class AbstractFormFactory implements FactoryInterface
     /**
      * @var \Symfony\Component\Form\FormFactoryInterface
      */
-    protected  $factory;
+    protected $factory;
 
     /**
      * @var string
