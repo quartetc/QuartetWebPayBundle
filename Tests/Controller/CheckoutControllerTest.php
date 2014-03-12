@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 class CheckoutControllerTest extends WebTestCase
 {
     /**
@@ -191,5 +190,4 @@ class CheckoutControllerTest extends WebTestCase
 
         return $user;
     }
-
 }

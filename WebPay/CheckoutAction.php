@@ -6,7 +6,6 @@ namespace Quartet\WebPayBundle\WebPay;
 use Quartet\WebPayBundle\Model\ChargeManagerInterface;
 use Quartet\WebPayBundle\Model\CustomerManagerInterface;
 use Quartet\WebPayBundle\Model\PaymentManagerInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WebPay\WebPay;
 
@@ -46,7 +45,7 @@ class CheckoutAction extends CreateChargeAction
         if ($payment = $this->paymentManager->remove()) {
             $type = 'card';
             $payment = $payment->getCard();
-        } else if ($payment = $this->customerManager->getCustomerId($values['user'])) {
+        } elseif ($payment = $this->customerManager->getCustomerId($values['user'])) {
             $type = 'customer';
         } else {
             throw new \RuntimeException('cannot checkout');

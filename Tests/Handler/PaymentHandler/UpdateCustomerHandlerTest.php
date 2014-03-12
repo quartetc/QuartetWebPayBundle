@@ -133,5 +133,4 @@ class UpdateCustomerHandlerTest extends \PHPUnit_Framework_TestCase
     {
         return $this->getMock('FOS\UserBundle\Model\UserInterface');
     }
-
 }

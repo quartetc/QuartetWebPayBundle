@@ -23,7 +23,6 @@ class ChainHandler implements PaymentHandlerInterface
         $this->handlers = $handlers;
     }
 
-
     /**
      * {@inheritdoc}
      */

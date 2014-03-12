@@ -86,5 +86,4 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
 
         return $user;
     }
-
 }
