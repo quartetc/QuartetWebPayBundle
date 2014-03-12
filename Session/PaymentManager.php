@@ -7,26 +7,15 @@ use Quartet\WebPayBundle\Model\PaymentInterface;
 use Quartet\WebPayBundle\Model\PaymentManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class PaymentManager implements PaymentManagerInterface
+class PaymentManager extends AbstractSessionManager implements PaymentManagerInterface
 {
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
-     */
-    private $session;
-
-    /**
-     * @var string
-     */
-    private $key;
-
     /**
      * @param Session $session
      * @param string  $key
      */
     public function __construct(Session $session, $key = '_quartet_webpay_payment_manager')
     {
-        $this->session = $session;
-        $this->key     = $key;
+        parent::__construct($session, $key);
     }
 
     /**
@@ -36,7 +25,7 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function put(PaymentInterface $payment)
     {
-        $this->session->set($this->generateKey(), $payment);
+        $this->setValue($payment);
     }
 
     /**
@@ -44,7 +33,7 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function get()
     {
-        return $this->session->get($this->generateKey());
+        return $this->getValue();
     }
 
     /**
@@ -52,7 +41,7 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function has()
     {
-        return $this->session->has($this->generateKey());
+        return $this->hasValue();
     }
 
     /**
@@ -60,15 +49,6 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function remove()
     {
-        return $this->session->remove($this->generateKey());
+        return $this->removeValue();
     }
-
-    /**
-     * @return string
-     */
-    private function generateKey()
-    {
-        return $this->key;
-    }
-
 }
