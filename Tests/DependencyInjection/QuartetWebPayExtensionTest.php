@@ -69,11 +69,27 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         $config = $this->getEmptyConfig();
         $loader->load(array($config), $this->configuration);
 
-        $this->assertHasDefinition('quartet_webpay');
+        $this->assertHasDefinition('quartet_webpay_client');
 
-        $webpay = $this->configuration->get('quartet_webpay');
+        $webpay = $this->configuration->get('quartet_webpay_client');
 
         $this->assertInstanceOf('WebPay\WebPay', $webpay);
+    }
+
+    /**
+     * @test
+     */
+    public function testCustomersServiceExists()
+    {
+        $loader = new QuartetWebPayExtension();
+        $config = $this->getEmptyConfig();
+        $loader->load(array($config), $this->configuration);
+
+        $this->assertHasDefinition('quartet_webpay.customers');
+
+        $customers = $this->configuration->get('quartet_webpay.customers');
+
+        $this->assertInstanceOf('WebPay\Api\Customers', $customers);
     }
 
     /**
