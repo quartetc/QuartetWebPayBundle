@@ -40,8 +40,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('api_base')
                     ->defaultNull()
                 ->end()
+                ->scalarNode('accept_language')
+                ->end()
             ->end()
         ;
     }
 }
- 

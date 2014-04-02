@@ -14,14 +14,21 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
      */
     private $configuration;
 
+    /**
+     * @var QuartetWebPayExtension
+     */
+    private $loader;
+
     protected function setUp()
     {
         $this->configuration = new ContainerBuilder();
+        $this->loader = new QuartetWebPayExtension();
     }
 
     protected function tearDown()
     {
         $this->configuration = null;
+        $this->loader = null;
     }
 
     /**
@@ -30,17 +37,15 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowExceptionUnlessApiSecretSet()
     {
-        $loader = new QuartetWebPayExtension();
         $config = $this->getEmptyConfig();
         unset($config['api_secret']);
-        $loader->load(array($config), $this->configuration);
+        $this->loader->load(array($config), $this->configuration);
     }
 
     public function testDefaultConfiguration()
     {
-        $loader = new QuartetWebPayExtension();
         $config = $this->getEmptyConfig();
-        $loader->load(array($config), $this->configuration);
+        $this->loader->load(array($config), $this->configuration);
 
         $this->assertParameter('my_api_secret_key', 'quartet_webpay.api_secret');
         $this->assertParameter('my_api_public_key', 'quartet_webpay.api_public');
@@ -52,10 +57,9 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testOverrideApiBase()
     {
-        $loader = new QuartetWebPayExtension();
         $config = $this->getEmptyConfig();
         $config['api_base'] = 'http://acme.com/';
-        $loader->load(array($config), $this->configuration);
+        $this->loader->load(array($config), $this->configuration);
 
         $this->assertParameter('http://acme.com/', 'quartet_webpay.api_base');
     }
@@ -65,15 +69,31 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testWebPayServiceExists()
     {
-        $loader = new QuartetWebPayExtension();
         $config = $this->getEmptyConfig();
-        $loader->load(array($config), $this->configuration);
+        $this->loader->load(array($config), $this->configuration);
 
         $this->assertHasDefinition('quartet_webpay_client');
 
         $webpay = $this->configuration->get('quartet_webpay_client');
 
         $this->assertInstanceOf('WebPay\WebPay', $webpay);
+    }
+
+    /**
+     * @test
+     */
+    public function testSetAcceptLanguageIfConfigure()
+    {
+        $config = $this->getEmptyConfig();
+        $config['accept_language'] = 'ja';
+        $this->loader->load(array($config), $this->configuration);
+
+        $this->assertHasDefinition('quartet_webpay_client');
+
+        $definition = $this->configuration->getDefinition('quartet_webpay_client');
+        $methodCalls = $definition->getMethodCalls();
+        $this->assertCount(1, $methodCalls);
+        $this->assertEquals(array('acceptLanguage', array('ja')), $methodCalls[0]);
     }
 
     /**

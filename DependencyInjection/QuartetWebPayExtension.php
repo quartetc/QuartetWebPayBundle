@@ -19,13 +19,18 @@ class QuartetWebPayExtension extends Extension
         $configuration = new Configuration();
         $configs = $this->processConfiguration($configuration, $config);
 
-        $container->setParameter('quartet_webpay.api_secret', $configs['api_secret']);
-        $container->setParameter('quartet_webpay.api_public', $configs['api_public']);
-        $container->setParameter('quartet_webpay.api_base', $configs['api_base']);
+        $this->remapParameters($container, $configs, 'quartet_webpay.%s', array(
+            'api_secret', 'api_public', 'api_base'
+        ));
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.yml');
+
+        if (isset($configs['accept_language'])) {
+            $container->getDefinition('quartet_webpay_client')->addMethodCall('acceptLanguage', array($configs['accept_language']));
+        }
+
     }
 
     /**
@@ -34,5 +39,18 @@ class QuartetWebPayExtension extends Extension
     public function getAlias()
     {
         return 'quartet_webpay';
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $configs
+     * @param string           $path
+     * @param array            $keys
+     */
+    private function remapParameters(ContainerBuilder $container, array $configs, $path, array $keys)
+    {
+        foreach ($keys as $key) {
+            $container->setParameter(sprintf($path, $key), $configs[$key]);
+        }
     }
 }
