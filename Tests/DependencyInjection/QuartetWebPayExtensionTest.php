@@ -85,13 +85,13 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         $config = $this->getEmptyConfig();
         $loader->load(array($config), $this->configuration);
 
-        $services = [
+        $services = array(
             'customers' => 'WebPay\Api\Customers',
             'account'   => 'WebPay\Api\Account',
             'tokens'    => 'WebPay\Api\Tokens',
             'events'    => 'WebPay\Api\Events',
             'charges'   => 'WebPay\Api\Charges',
-        ];
+        );
 
         foreach ($services as $id => $class) {
             $this->assertHasDefinition("quartet_webpay.{$id}");
