@@ -11,3 +11,31 @@ services:
     factory_method: __get
     arguments:
       - customers
+
+  quartet_webpay.account:
+    class: WebPay\Api\Account
+    factory_service: quartet_webpay_client
+    factory_method: __get
+    arguments:
+      - account
+
+  quartet_webpay.tokens:
+    class: WebPay\Api\Tokens
+    factory_service: quartet_webpay_client
+    factory_method: __get
+    arguments:
+      - tokens
+
+  quartet_webpay.events:
+    class: WebPay\Api\Events
+    factory_service: quartet_webpay_client
+    factory_method: __get
+    arguments:
+      - events
+
+  quartet_webpay.charges:
+    class: WebPay\Api\Charges
+    factory_service: quartet_webpay_client
+    factory_method: __get
+    arguments:
+      - charges
