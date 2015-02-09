@@ -39,3 +39,10 @@ services:
     factory_method: __get
     arguments:
       - charges
+
+  quartet_webpay.twig_extension:
+    class: Quartet\Bundle\WebPayBundle\Twig\Extension\WebPayExtension
+    arguments:
+      - %quartet_webpay.test%
+    tags:
+      - { name: twig.extension }
