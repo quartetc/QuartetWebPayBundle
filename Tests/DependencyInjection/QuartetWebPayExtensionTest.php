@@ -33,15 +33,31 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @dataProvider provideRequiredConfigurationNames
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
-    public function testThrowExceptionUnlessApiSecretSet()
+    public function testThrowExceptionUnlessConfigureRequired($requiredKey)
     {
         $config = $this->getEmptyConfig();
-        unset($config['api_secret']);
+        unset($config[$requiredKey]);
         $this->loader->load(array($config), $this->configuration);
     }
 
+    /**
+     * @return array
+     */
+    public function provideRequiredConfigurationNames()
+    {
+        return [
+            ['api_public'],
+            ['api_secret'],
+            ['test'],
+        ];
+    }
+
+    /**
+     * @test
+     */
     public function testDefaultConfiguration()
     {
         $config = $this->getEmptyConfig();
@@ -50,6 +66,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('my_api_secret_key', 'quartet_webpay.api_secret');
         $this->assertParameter('my_api_public_key', 'quartet_webpay.api_public');
         $this->assertParameter(null, 'quartet_webpay.api_base');
+        $this->assertParameter(false, 'quartet_webpay.test');
     }
 
     /**
@@ -121,6 +138,45 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function testTestConfig()
+    {
+        $config = $this->getEmptyConfig();
+        $config['test'] = true;
+        $this->loader->load(array($config), $this->configuration);
+
+        $this->assertParameter(true, 'quartet_webpay.test');
+    }
+
+    /**
+     * @test
+     * @dataProvider provideInferTestModeTests
+     * @param $expectedMode
+     * @param $apiPublic
+     */
+    public function testInferTestMode($expectedMode, $apiPublic)
+    {
+        $config = $this->getEmptyConfig();
+        $config['api_public'] = $apiPublic;
+        unset($config['test']);
+
+        $this->loader->load(array($config), $this->configuration);
+        $this->assertParameter($expectedMode, 'quartet_webpay.test');
+    }
+
+    /**
+     * @return array
+     */
+    public function provideInferTestModeTests()
+    {
+        return [
+            [false, 'live_hoge'],
+            [true, 'test_hoge'],
+        ];
+    }
+
+    /**
      * @param $id
      */
     private function assertHasDefinition($id)
@@ -145,6 +201,7 @@ class QuartetWebPayExtensionTest extends \PHPUnit_Framework_TestCase
         return array(
             'api_secret'    => 'my_api_secret_key',
             'api_public'    => 'my_api_public_key',
+            'test'          => false,
         );
     }
 }
