@@ -60,9 +60,9 @@ class WebPayExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('webpay_path', array($this, 'path')),
-            new \Twig_SimpleFunction('webpay_charge_path', array($this, 'chargePath')),
-            new \Twig_SimpleFunction('webpay_customer_path', array($this, 'customerPath')),
+            new \Twig_SimpleFunction('webpay_path', [$this, 'path']),
+            new \Twig_SimpleFunction('webpay_charge_path', [$this, 'chargePath']),
+            new \Twig_SimpleFunction('webpay_customer_path', [$this, 'customerPath']),
         );
     }
 

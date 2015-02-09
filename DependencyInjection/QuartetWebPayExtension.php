@@ -19,16 +19,16 @@ class QuartetWebPayExtension extends Extension
         $configuration = new Configuration();
         $configs = $this->processConfiguration($configuration, $config);
 
-        $this->remapParameters($container, $configs, 'quartet_webpay.%s', array(
+        $this->remapParameters($container, $configs, 'quartet_webpay.%s', [
             'api_secret', 'api_public', 'api_base', 'test'
-        ));
+        ]);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.yml');
 
         if (isset($configs['accept_language'])) {
-            $container->getDefinition('quartet_webpay_client')->addMethodCall('acceptLanguage', array($configs['accept_language']));
+            $container->getDefinition('quartet_webpay_client')->addMethodCall('acceptLanguage', [$configs['accept_language']]);
         }
 
     }
