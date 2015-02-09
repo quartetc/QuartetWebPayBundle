@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "PHP": ">=5.4",
         "symfony/framework-bundle": "~2.4",
         "webpay/webpay": "~1.1",
         "twig/twig": "~1.15"
