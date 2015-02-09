@@ -11,7 +11,8 @@
     ],
     "require": {
         "symfony/framework-bundle": "~2.4",
-        "webpay/webpay": "~1.1"
+        "webpay/webpay": "~1.1",
+        "twig/twig": "~1.15"
     },
     "autoload": {
         "psr-0": {
