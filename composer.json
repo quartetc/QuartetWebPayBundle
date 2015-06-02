@@ -5,15 +5,18 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Hoshino",
+            "name": "Shota Hoshino",
             "email": "lga0503@gmail.com"
         }
     ],
     "require": {
         "PHP": ">=5.4",
-        "symfony/framework-bundle": "~2.4",
+        "symfony/framework-bundle": "~2.5",
         "webpay/webpay": "~1.1",
         "twig/twig": "~1.15"
+    },
+    "require-dev": {
+        "symfony/browser-kit": "~2.5"
     },
     "autoload": {
         "psr-0": {
