@@ -1,0 +1,7 @@
+framework:
+  secret: secret
+  test: ~
+quartet_webpay:
+  api_public: public
+  api_secret: secret
+  test: true
