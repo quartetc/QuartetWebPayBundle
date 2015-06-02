@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Quartet\Bundle\WebPayBundle\Tests\Functional;
+namespace Quartet\Bundle\WebPayBundle\Functional;
 
 
 use Quartet\Bundle\WebPayBundle\QuartetWebPayBundle;
