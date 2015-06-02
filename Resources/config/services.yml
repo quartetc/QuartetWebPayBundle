@@ -5,38 +5,36 @@ services:
       - %quartet_webpay.api_secret%
       - %quartet_webpay.api_base%
 
+  quartet_webpay.accessor:
+    abstract: true
+
   quartet_webpay.customers:
+    parent: quartet_webpay.accessor
     class: WebPay\Api\Customers
-    factory_service: quartet_webpay_client
-    factory_method: __get
     arguments:
       - customers
 
   quartet_webpay.account:
+    parent: quartet_webpay.accessor
     class: WebPay\Api\Account
-    factory_service: quartet_webpay_client
-    factory_method: __get
     arguments:
       - account
 
   quartet_webpay.tokens:
+    parent: quartet_webpay.accessor
     class: WebPay\Api\Tokens
-    factory_service: quartet_webpay_client
-    factory_method: __get
     arguments:
       - tokens
 
   quartet_webpay.events:
+    parent: quartet_webpay.accessor
     class: WebPay\Api\Events
-    factory_service: quartet_webpay_client
-    factory_method: __get
     arguments:
       - events
 
   quartet_webpay.charges:
+    parent: quartet_webpay.accessor
     class: WebPay\Api\Charges
-    factory_service: quartet_webpay_client
-    factory_method: __get
     arguments:
       - charges
 

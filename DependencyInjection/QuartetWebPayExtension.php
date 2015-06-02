@@ -8,6 +8,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 class QuartetWebPayExtension extends Extension
 {
@@ -24,13 +25,27 @@ class QuartetWebPayExtension extends Extension
         ]);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
         $loader->load('services.yml');
+
+        $this->configureApiAccessor($container);
 
         if (isset($configs['accept_language'])) {
             $container->getDefinition('quartet_webpay_client')->addMethodCall('acceptLanguage', [$configs['accept_language']]);
         }
+    }
 
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function configureApiAccessor(ContainerBuilder $container)
+    {
+        $definition = $container->getDefinition('quartet_webpay.accessor');
+
+        if (method_exists('Symfony\Component\DependencyInjection\Definition', 'setFactory')) {
+            $definition->setFactory([new Reference('quartet_webpay_client'), '__get']);
+        } else {
+            $definition->setFactoryService('quartet_webpay_client')->setFactoryMethod('__get');
+        }
     }
 
     /**
