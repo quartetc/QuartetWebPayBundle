@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Quartet\Bundle\WebPayBundle\Tests\DependencyInjection;
+namespace Quartet\Bundle\WebPayBundle\DependencyInjection;
 
 
 use Quartet\Bundle\WebPayBundle\DependencyInjection\QuartetWebPayExtension;

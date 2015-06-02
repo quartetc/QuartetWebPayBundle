@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Quartet\Bundle\WebPayBundle\Tests\Functional;
+namespace Quartet\Bundle\WebPayBundle\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
 
@@ -12,6 +12,6 @@ class WebTestCase extends BaseWebTestCase
      */
     protected static function getKernelClass()
     {
-        return 'Quartet\Bundle\WebPayBundle\Tests\Functional\TestKernel';
+        return 'Quartet\Bundle\WebPayBundle\Functional\TestKernel';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Quartet\Bundle\WebPayBundle\Tests\Twig\Extension;
+namespace Quartet\Bundle\WebPayBundle\Twig\Extension;
 
 use Quartet\Bundle\WebPayBundle\Twig\Extension\WebPayExtension;
 
