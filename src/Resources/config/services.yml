@@ -2,12 +2,12 @@ services:
   quartet_webpay_client:
     class: WebPay\WebPay
     arguments:
-      - %quartet_webpay.api_secret%
-      - %quartet_webpay.api_base%
+      - "%quartet_webpay.api_secret%"
+      - "%quartet_webpay.api_base%"
 
   quartet_webpay.accessor:
     abstract: true
-    factory: [@quartet_webpay_client, __get]
+    factory: ["@quartet_webpay_client", __get]
 
   quartet_webpay.customers:
     parent: quartet_webpay.accessor
@@ -42,6 +42,6 @@ services:
   quartet_webpay.twig_extension:
     class: Quartet\Bundle\WebPayBundle\Twig\Extension\WebPayExtension
     arguments:
-      - %quartet_webpay.test%
+      - "%quartet_webpay.test%"
     tags:
       - { name: twig.extension }
